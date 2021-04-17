@@ -8,7 +8,7 @@
 
 
 /// <summary>
-/// Deklarierung für konstante Variablen, zum Konvertieren von verschiedenen Maßeinheiten.
+/// Deklarierung fÃ¼r konstante Variablen, zum Konvertieren von verschiedenen MaÃŸeinheiten.
 /// </summary>
 const double TEBIBYTE_MULTIPLIER = 1024. * 1024. * 1024. * 1024.;
 const double GIBIBYTE_MULTIPLIER = 1024. * 1024. * 1024.;
@@ -17,7 +17,7 @@ const double KIBIBYTE_MULTIPLIER = 1024.;
 const double BYTE_MULTIPLIER = 8;
 
 /// <summary>
-/// Gibt die angegebene Nachricht in der Konsole aus, greift den Input vom user ab und gibt diesen an den caller zurück.
+/// Gibt die angegebene Nachricht in der Konsole aus, greift den Input vom user ab und gibt diesen an den caller zurÃ¼ck.
 /// </summary>
 /// <param name="message">Die Nachricht die ausgegeben wird.</param>
 /// <returns>Der Input den der User eingibt.</returns>
@@ -30,10 +30,10 @@ std::string get_user_input(std::string message) noexcept
 }
 
 /// <summary>
-/// Gibt den Namen der Maßeinheit zurück, anhand eines angegebenen Integers, welcher für diese Maßeinheit im Menü festegelegt ist.
+/// Gibt den Namen der MaÃŸeinheit zurÃ¼ck, anhand eines angegebenen Integers, welcher fÃ¼r diese MaÃŸeinheit im MenÃ¼ festegelegt ist.
 /// </summary>
-/// <param name="InputType">Die Zahl die zur Identifizierung der Maßeinheit verwendet wird.</param>
-/// <returns>Den Namen der Maßeinheit.</returns>
+/// <param name="InputType">Die Zahl die zur Identifizierung der MaÃŸeinheit verwendet wird.</param>
+/// <returns>Den Namen der MaÃŸeinheit.</returns>
 std::string get_type_name(int InputType) noexcept
 {
     switch (InputType)
@@ -55,10 +55,10 @@ std::string get_type_name(int InputType) noexcept
 }
 
 /// <summary>
-/// Konvertiert den angegebenen Input anhand eines Integers, welcher die Maßeinheit identifiziert, in Bits und gibt den wert an den caller zurück.
+/// Konvertiert den angegebenen Input anhand eines Integers, welcher die MaÃŸeinheit identifiziert, in Bits und gibt den wert an den caller zurÃ¼ck.
 /// </summary>
 /// <param name="InputValue">Der Wert der in Bits konvertiert werden soll.</param>
-/// <param name="InputType">Die Zahl die zur Identifizierung der Maßeinheit verwendet wird.</param>
+/// <param name="InputType">Die Zahl die zur Identifizierung der MaÃŸeinheit verwendet wird.</param>
 /// <returns>Den zu konvertierenden Wert in Bits.</returns>
 double convert_type_to_bits(double InputValue, int InputType)
 {
@@ -81,11 +81,11 @@ double convert_type_to_bits(double InputValue, int InputType)
 }
 
 /// <summary>
-/// Konvertiert den angegebenen Input in Bits anhand eines Integers, welcher die Maßeinheit identifiziert, in die gewünsche Maßeinheit und gibt den wert an den caller zurück.
+/// Konvertiert den angegebenen Input in Bits anhand eines Integers, welcher die MaÃŸeinheit identifiziert, in die gewÃ¼nsche MaÃŸeinheit und gibt den wert an den caller zurÃ¼ck.
 /// </summary>
 /// <param name="InputValue">Der Wert in Bits der konvertiert werden soll.</param>
-/// <param name="InputType">Die Zahl die zur Identifizierung der Maßeinheit verwendet wird.</param>
-/// <returns>Den zu konvertierenden Wert in der gewünschten Maßeinheit.</returns>
+/// <param name="InputType">Die Zahl die zur Identifizierung der MaÃŸeinheit verwendet wird.</param>
+/// <returns>Den zu konvertierenden Wert in der gewÃ¼nschten MaÃŸeinheit.</returns>
 double convert_bits_to_type(double InputValue, int InputType)
 {
     switch (InputType)
@@ -107,10 +107,10 @@ double convert_bits_to_type(double InputValue, int InputType)
 }
 
 /// <summary>
-/// Greift den Input des Users ab und beginnt mit der Konvertierung in die verschiedenen Maßeinheiten.
+/// Greift den Input des Users ab und beginnt mit der Konvertierung in die verschiedenen MaÃŸeinheiten.
 /// </summary>
-/// <param name="InputType">Ein Integer mit dem die Maßeinheit des Input identifiziert wird.</param>
-/// <returns>Einen Boolean welcher identifiziert ob die funktion erfolgreich ausgeführt wird.</returns>
+/// <param name="InputType">Ein Integer mit dem die MaÃŸeinheit des Input identifiziert wird.</param>
+/// <returns>Einen Boolean welcher identifiziert ob die funktion erfolgreich ausgefÃ¼hrt wird.</returns>
 bool convert(int InputType)
 {
     std::cout << std::endl;
@@ -121,12 +121,12 @@ bool convert(int InputType)
     double m_inputValue = 0;
 
     /// <summary>
-    /// Führt eine loop aus, welche nur unterbrochen wird, wenn der angegebene Input nicht gleich 0 ist.
+    /// FÃ¼hrt eine loop aus, welche nur unterbrochen wird, wenn der angegebene Input nicht gleich 0 ist.
     /// </summary>
     while (m_inputValue == 0)
     {
         /// <summary>
-        /// Grefit alle Fehlermeldungen (Exceptions) ab und führt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstürtzt.
+        /// Grefit alle Fehlermeldungen (Exceptions) ab und fÃ¼hrt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstÃ¼rtzt.
         /// </summary>
         try
         {
@@ -136,7 +136,7 @@ bool convert(int InputType)
             m_inputValue = std::atof(get_user_input("Geben Sie einen Wert ein: ").c_str());
 
             /// <summary>
-            /// Überprüft ob der Input nicht gleich null ist, wenn ja wird eine Fehlermeldung ausgegeben und eine weitere Input abfrage durchgeführt.
+            /// ÃœberprÃ¼ft ob der Input nicht gleich null ist, wenn ja wird eine Fehlermeldung ausgegeben und eine weitere Input abfrage durchgefÃ¼hrt.
             /// </summary>
             if (m_inputValue == 0)
             {
@@ -150,38 +150,38 @@ bool convert(int InputType)
             auto m_inputInBits = convert_type_to_bits(m_inputValue, InputType);
 
             /// <summary>
-            /// Führt eine loop mit allen verfügbaren Maßeinheit Identifikatoren aus 
+            /// FÃ¼hrt eine loop mit allen verfÃ¼gbaren MaÃŸeinheitidentifikatoren aus, konvertiert den input in bits in die MaÃŸeinheit und gibt den wert in der Konsole aus.
             /// </summary>
             for (int i = 1; i <= 6; i++)
                 std::cout << get_type_name(i) << ": " << convert_bits_to_type(m_inputInBits, i) << std::endl;
         }
         /// <summary>
-        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen über den vorgefallenen Fehler enthält,
+        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen Ã¼ber den vorgefallenen Fehler enthÃ¤lt,
         /// beispielsweise die Fehlermeldung.
         /// </summary>
         catch (const std::exception& errorCode)
         {
             /// <summary>
-            /// Sollte ein Fehler aufgetaucht sein, wird hier eine Fehlermeldung in der Konsole ausgegeben. Der User kann sich dann mit dieser Fehlermeldung, sofern nötig, ggf. an die Developer
+            /// Sollte ein Fehler aufgetaucht sein, wird hier eine Fehlermeldung in der Konsole ausgegeben. Der User kann sich dann mit dieser Fehlermeldung, sofern nÃ¶tig, ggf. an die Developer
             /// der Applikation wenden.
             /// </summary>
             std::cout << "An error occurred somewhere during operation. Error Code:  " << errorCode.what() << std::endl << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(2500));
             /// <summary>
-            /// Gibt den Wert false zurück, da die Konvertierung nicht ohne Fehler durchgeführt werden konnte.
+            /// Gibt den Wert false zurÃ¼ck, da die Konvertierung nicht ohne Fehler durchgefÃ¼hrt werden konnte.
             /// </summary>
             return false;
         }
     }
     /// <summary>
-    /// Gibt den Wert true zurück, da die Konvertierung ohne Fehler durchgeführt wurde.
+    /// Gibt den Wert true zurÃ¼ck, da die Konvertierung ohne Fehler durchgefÃ¼hrt wurde.
     /// </summary>
     std::cout << std::endl;
     return true;
 }
 
 /// <summary>
-/// Zeigt die verscheidenen Auswahlmöglichkeiten in der Konsole an.
+/// Zeigt die verscheidenen AuswahlmÃ¶glichkeiten in der Konsole an.
 /// </summary>
 void display_menu() noexcept
 {
@@ -196,7 +196,7 @@ void display_menu() noexcept
 }
 
 /// <summary>
-/// Die Hauptloop der Applikation. Hier wird das Menü angezeigt und die Maßeinheit der eingabe Festgelegt.
+/// Die Hauptloop der Applikation. Hier wird das MenÃ¼ angezeigt und die MaÃŸeinheit der eingabe Festgelegt.
 /// </summary>
 void main_loop()
 {
@@ -206,17 +206,17 @@ void main_loop()
     std::cout << std::fixed;
 
     /// <summary>
-    /// Eine Endlosschleife die läuft bis der User den Input für das beenden gibt.
+    /// Eine Endlosschleife die lÃ¤uft bis der User den Input fÃ¼r das beenden gibt.
     /// </summary>
     while (true)
     {
         /// <summary>
-        /// Grefit alle Fehlermeldungen (Exceptions) ab und führt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstürtzt.
+        /// Grefit alle Fehlermeldungen (Exceptions) ab und fÃ¼hrt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstÃ¼rtzt.
         /// </summary>
         try
         {
             /// <summary>
-            /// Zeigt das Menü in der Konsole an.
+            /// Zeigt das MenÃ¼ in der Konsole an.
             /// </summary>
             display_menu();
 
@@ -226,12 +226,12 @@ void main_loop()
             int m_inputType = std::stoi(get_user_input("Ihre Eingabe: "));
 
             /// <summary>
-            /// Überprüft ob der Wert von der Variable m_inputType gleich 0 ist, wenn ja wird die loop unterbrochen.
+            /// ÃœberprÃ¼ft ob der Wert von der Variable m_inputType gleich 0 ist, wenn ja wird die loop unterbrochen.
             /// </summary>
             if (m_inputType == 0)
                 break;
             /// <summary>
-            /// Überprüft ob der Wert von der Variable m_inputType kleiner als 0 oder größer als 6 ist, wenn ja wird eine Fehlermeldung ausgegeben.
+            /// ÃœberprÃ¼ft ob der Wert von der Variable m_inputType kleiner als 0 oder grÃ¶ÃŸer als 6 ist, wenn ja wird eine Fehlermeldung ausgegeben.
             /// </summary>
             if (m_inputType < 0 || m_inputType > 6)
             {
@@ -246,7 +246,7 @@ void main_loop()
             convert(m_inputType);
         }
         /// <summary>
-        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen über den vorgefallenen Fehler enthält,
+        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen Ã¼ber den vorgefallenen Fehler enthÃ¤lt,
         /// beispielsweise die Fehlermeldung.
         /// </summary>
         catch (const std::exception& errorCode)
@@ -260,7 +260,7 @@ void main_loop()
 /// <summary>
 /// Der EntryPoint der Applikation.
 /// </summary>
-/// <returns>Einen Wert, welcher angibt, ob das Programm erfolgreich ausgefürt wurde. (0 = SUCCESS)</returns>
+/// <returns>Einen Wert, welcher angibt, ob das Programm erfolgreich ausgefÃ¼rt wurde. (0 = SUCCESS)</returns>
 int main() noexcept
 {
     /// <summary>
@@ -269,12 +269,12 @@ int main() noexcept
     SetConsoleTitleA("Kontrollstrukturen und Verzweigungen");
     
     /// <summary>
-    /// Führt die main_loop aus.
+    /// FÃ¼hrt die main_loop aus.
     /// </summary>
     main_loop();
     
     /// <summary>
-    /// Gibt den Wert 0 zurück und beendet die Applikation.
+    /// Gibt den Wert 0 zurÃ¼ck und beendet die Applikation.
     /// </summary>
     return 0;
 }
