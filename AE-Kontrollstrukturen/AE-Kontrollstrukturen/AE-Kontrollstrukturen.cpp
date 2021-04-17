@@ -17,7 +17,7 @@ const double KIBIBYTE_MULTIPLIER = 1024.;
 const double BYTE_MULTIPLIER = 8;
 
 /// <summary>
-/// Gibt die angegebene Nachricht in der Konsole aus, greift den Input vom user ab und gibt diesen an den callee zurück.
+/// Gibt die angegebene Nachricht in der Konsole aus, greift den Input vom user ab und gibt diesen an den caller zurück.
 /// </summary>
 /// <param name="message">Die Nachricht die ausgegeben wird.</param>
 /// <returns>Der Input den der User eingibt.</returns>
@@ -55,7 +55,7 @@ std::string get_type_name(int InputType) noexcept
 }
 
 /// <summary>
-/// Konvertiert den angegebenen Input anhand eines Integers, welcher die Maßeinheit identifiziert, in Bits und gibt den wert an den callee zurück.
+/// Konvertiert den angegebenen Input anhand eines Integers, welcher die Maßeinheit identifiziert, in Bits und gibt den wert an den caller zurück.
 /// </summary>
 /// <param name="InputValue">Der Wert der in Bits konvertiert werden soll.</param>
 /// <param name="InputType">Die Zahl die zur Identifizierung der Maßeinheit verwendet wird.</param>
@@ -81,7 +81,7 @@ double convert_type_to_bits(double InputValue, int InputType)
 }
 
 /// <summary>
-/// Konvertiert den angegebenen Input in Bits anhand eines Integers, welcher die Maßeinheit identifiziert, in die gewünsche Maßeinheit und gibt den wert an den callee zurück.
+/// Konvertiert den angegebenen Input in Bits anhand eines Integers, welcher die Maßeinheit identifiziert, in die gewünsche Maßeinheit und gibt den wert an den caller zurück.
 /// </summary>
 /// <param name="InputValue">Der Wert in Bits der konvertiert werden soll.</param>
 /// <param name="InputType">Die Zahl die zur Identifizierung der Maßeinheit verwendet wird.</param>
@@ -111,7 +111,7 @@ double convert_bits_to_type(double InputValue, int InputType)
 /// </summary>
 /// <param name="InputType">Ein Integer mit dem die Maßeinheit des Input identifiziert wird.</param>
 /// <returns>Einen Boolean welcher identifiziert ob die funktion erfolgreich ausgeführt wird.</returns>
-bool convert_all(int InputType)
+bool convert(int InputType)
 {
     std::cout << std::endl;
 
@@ -125,6 +125,9 @@ bool convert_all(int InputType)
     /// </summary>
     while (m_inputValue == 0)
     {
+        /// <summary>
+        /// Grefit alle Fehlermeldungen (Exceptions) ab und führt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstürtzt.
+        /// </summary>
         try
         {
             /// <summary>
@@ -152,13 +155,27 @@ bool convert_all(int InputType)
             for (int i = 1; i <= 6; i++)
                 std::cout << get_type_name(i) << ": " << convert_bits_to_type(m_inputInBits, i) << std::endl;
         }
+        /// <summary>
+        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen über den vorgefallenen Fehler enthält,
+        /// beispielsweise die Fehlermeldung.
+        /// </summary>
         catch (const std::exception& errorCode)
         {
+            /// <summary>
+            /// Sollte ein Fehler aufgetaucht sein, wird hier eine Fehlermeldung in der Konsole ausgegeben. Der User kann sich dann mit dieser Fehlermeldung, sofern nötig, ggf. an die Developer
+            /// der Applikation wenden.
+            /// </summary>
             std::cout << "An error occurred somewhere during operation. Error Code:  " << errorCode.what() << std::endl << std::endl;
             std::this_thread::sleep_for(std::chrono::milliseconds(2500));
+            /// <summary>
+            /// Gibt den Wert false zurück, da die Konvertierung nicht ohne Fehler durchgeführt werden konnte.
+            /// </summary>
             return false;
         }
     }
+    /// <summary>
+    /// Gibt den Wert true zurück, da die Konvertierung ohne Fehler durchgeführt wurde.
+    /// </summary>
     std::cout << std::endl;
     return true;
 }
@@ -168,7 +185,6 @@ bool convert_all(int InputType)
 /// </summary>
 void display_menu() noexcept
 {
-    std::cout << std::fixed;
     std::cout << "1.) Eingabe in Bit." << std::endl;
     std::cout << "2.) Eingabe in Byte." << std::endl;
     std::cout << "3.) Eingabe in Kibibyte." << std::endl;
@@ -185,19 +201,38 @@ void display_menu() noexcept
 void main_loop()
 {
     /// <summary>
+    /// Setzt die Konsole in den fixed notation Modus, damit die cout funktion Zahlen ohne exponenten ausgibt. (bsp. 1,1e+12 wird 1,100,000,000,000)
+    /// </summary>
+    std::cout << std::fixed;
+
+    /// <summary>
     /// Eine Endlosschleife die läuft bis der User den Input für das beenden gibt.
     /// </summary>
     while (true)
     {
-
+        /// <summary>
+        /// Grefit alle Fehlermeldungen (Exceptions) ab und führt ein catch durch um diese Fehlermeldungen zu verarbeiten, ohne dass die Applikation dabei abstürtzt.
+        /// </summary>
         try
         {
+            /// <summary>
+            /// Zeigt das Menü in der Konsole an.
+            /// </summary>
             display_menu();
 
+            /// <summary>
+            /// Greift den Input des Benutzers ab und konvertiert diesen in einen Integer.
+            /// </summary>
             int m_inputType = std::stoi(get_user_input("Ihre Eingabe: "));
 
+            /// <summary>
+            /// Überprüft ob der Wert von der Variable m_inputType gleich 0 ist, wenn ja wird die loop unterbrochen.
+            /// </summary>
             if (m_inputType == 0)
                 break;
+            /// <summary>
+            /// Überprüft ob der Wert von der Variable m_inputType kleiner als 0 oder größer als 6 ist, wenn ja wird eine Fehlermeldung ausgegeben.
+            /// </summary>
             if (m_inputType < 0 || m_inputType > 6)
             {
                 std::cout << "Die Eingabe muss zwischen 0 und 6 liegen. Ihre Eingabe: " << m_inputType << std::endl << std::endl;
@@ -205,8 +240,15 @@ void main_loop()
                 continue;
             }
 
-            convert_all(m_inputType);
+            /// <summary>
+            /// Beginnt mit dem konvertierung Prozess.
+            /// </summary>
+            convert(m_inputType);
         }
+        /// <summary>
+        /// Alle Fehlermeldungen die im obrigen try scope vorkommen werden hier verarbeitet. Die std::exception ist hier ein Objekt welches Informationen über den vorgefallenen Fehler enthält,
+        /// beispielsweise die Fehlermeldung.
+        /// </summary>
         catch (const std::exception& errorCode)
         {
             std::cout << "An error occurred somewhere during operation. Error Code:  " << errorCode.what() << std::endl << std::endl;
